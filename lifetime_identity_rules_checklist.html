@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>দৈনন্দিন জীবনের আপসহীন নিয়মাবলি | Lifetime Identity Rules</title>
+    <style>
+        :root {
+            --bg-main: #f3f6fa;
+            --card-bg: #ffffff;
+            --primary: #0f766e;
+            --primary-light: #ccfbf1;
+            --primary-dark: #115e59;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --danger: #ef4444;
+            --danger-bg: #fee2e2;
+            --success: #10b981;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans Bengali', 'SolaimanLipi', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px 15px 60px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .app-header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #ffffff;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .main-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            outline: none;
+            border-radius: 6px;
+            padding: 4px 8px;
+            margin-left: -8px;
+            transition: background 0.2s;
+        }
+
+        .main-title:hover, .main-title:focus {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .sub-title {
+            color: #94a3b8;
+            font-size: 1rem;
+            margin-top: 4px;
+            outline: none;
+            border-radius: 6px;
+            padding: 2px 8px;
+            margin-left: -8px;
+        }
+
+        .sub-title:hover, .sub-title:focus {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .progress-wrapper {
+            margin-top: 24px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 15px 18px;
+            border-radius: 10px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #e2e8f0;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #34d399);
+            width: 0%;
+            border-radius: 99px;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 24px;
+            background: var(--card-bg);
+            padding: 12px 18px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+        }
+
+        .toolbar-hint {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 8px 14px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            background-color: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        .btn-danger-outline {
+            background-color: transparent;
+            border: 1px solid #fecaca;
+            color: var(--danger);
+        }
+
+        .btn-danger-outline:hover {
+            background-color: var(--danger-bg);
+        }
+
+        .category-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            margin-bottom: 22px;
+            overflow: hidden;
+            transition: box-shadow 0.2s;
+        }
+
+        .category-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .category-header {
+            background-color: #f8fafc;
+            padding: 18px 22px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .category-title-area {
+            flex: 1;
+        }
+
+        .category-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            outline: none;
+            border-radius: 6px;
+            padding: 2px 6px;
+            margin-left: -6px;
+        }
+
+        .category-purpose {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-top: 4px;
+            outline: none;
+            border-radius: 6px;
+            padding: 2px 6px;
+            margin-left: -6px;
+        }
+
+        [contenteditable="true"]:hover {
+            background-color: rgba(15, 118, 110, 0.06);
+        }
+
+        [contenteditable="true"]:focus {
+            background-color: #ffffff;
+            box-shadow: 0 0 0 2px var(--primary);
+            outline: none;
+        }
+
+        .app-header [contenteditable="true"]:focus {
+            background-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 2px #34d399;
+        }
+
+        .icon-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .icon-btn:hover {
+            background-color: var(--danger-bg);
+            color: var(--danger);
+        }
+
+        .rules-list {
+            list-style: none;
+            padding: 10px 22px;
+        }
+
+        .rule-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px dashed var(--border-color);
+            transition: opacity 0.25s;
+        }
+
+        .rule-item:last-child {
+            border-bottom: none;
+        }
+
+        .checkbox-wrapper {
+            padding-top: 3px;
+        }
+
+        .custom-checkbox {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            border: 2px solid #cbd5e1;
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+            background-color: #fff;
+            display: grid;
+            place-content: center;
+        }
+
+        .custom-checkbox:hover {
+            border-color: var(--primary);
+        }
+
+        .custom-checkbox:checked {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .custom-checkbox:checked::after {
+            content: "";
+            width: 6px;
+            height: 11px;
+            border: solid white;
+            border-width: 0 2.5px 2.5px 0;
+            transform: rotate(45deg);
+            margin-bottom: 2px;
+        }
+
+        .rule-content {
+            flex: 1;
+        }
+
+        .rule-title {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--text-main);
+            display: inline-block;
+            border-radius: 4px;
+            padding: 1px 5px;
+            margin-left: -5px;
+            transition: color 0.2s;
+        }
+
+        .rule-desc {
+            font-size: 0.96rem;
+            color: #475569;
+            margin-top: 3px;
+            border-radius: 4px;
+            padding: 2px 5px;
+            margin-left: -5px;
+        }
+
+        .rule-item.completed .rule-title {
+            text-decoration: line-through;
+            color: #94a3b8;
+        }
+
+        .rule-item.completed .rule-desc {
+            color: #94a3b8;
+        }
+
+        .category-footer {
+            padding: 12px 22px 16px;
+            background-color: #ffffff;
+        }
+
+        .btn-add-rule {
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            background-color: #f0fdfa;
+            border: 1px dashed #5eead4;
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn-add-rule:hover {
+            background-color: var(--primary-light);
+            border-color: var(--primary);
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .toolbar, .icon-btn, .category-footer {
+                display: none !important;
+            }
+            .app-header {
+                background: #0f172a !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .category-card {
+                box-shadow: none;
+                border: 1px solid #cbd5e1;
+                break-inside: avoid;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .main-title {
+                font-size: 1.45rem;
+            }
+            .category-header, .rules-list, .category-footer {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header class="app-header">
+        <div class="header-top">
+            <div style="flex: 1;">
+                <h1 id="mainTitle" class="main-title" contenteditable="true" spellcheck="false">🛡️ দৈনন্দিন জীবনের আপসহীন নিয়মাবলি (Lifetime Identity Rules) v1</h1>
+                <p id="subTitle" class="sub-title" contenteditable="true" spellcheck="false">প্রতিদিনের আত্ম-শৃঙ্খলা ও প্রোডাক্টিভিটি ট্র্যাকার (যেকোনো লেখায় ক্লিক করে এডিট করুন)</p>
+            </div>
+        </div>
+
+        <div class="progress-wrapper">
+            <div class="progress-info">
+                <span id="progressText">আজকের অগ্রগতি: ০ / ১১ সম্পন্ন</span>
+                <span id="progressPercent">0%</span>
+            </div>
+            <div class="progress-track">
+                <div id="progressFill" class="progress-fill"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="toolbar">
+        <div class="toolbar-hint">
+            <span>💡 টিপস: শিরোনাম, উদ্দেশ্য বা যেকোনো রুলের ওপর ক্লিক করলেই এডিট করা যাবে।</span>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-primary" onclick="addCategory()">+ নতুন ক্যাটাগরি</button>
+            <button class="btn btn-outline" onclick="uncheckAll()">↺ টিক রিসেট</button>
+            <button class="btn btn-outline" onclick="window.print()">🖨️ প্রিন্ট / PDF</button>
+            <button class="btn btn-danger-outline" onclick="resetToDefault()">⚠️ ডিফল্ট রিসেট</button>
+        </div>
+    </div>
+
+    <main id="checklistContainer"></main>
+</div>
+
+<script>
+    const defaultData = {
+        title: "🛡️ দৈনন্দিন জীবনের আপসহীন নিয়মাবলি (Lifetime Identity Rules) v1",
+        subtitle: "প্রতিদিনের আত্ম-শৃঙ্খলা ও প্রোডাক্টিভিটি ট্র্যাকার (যেকোনো লেখায় ক্লিক করে এডিট করুন)",
+        categories: [
+            {
+                id: "cat_1",
+                title: "ইসলামিক রুলস (The Islamic Rules)",
+                purpose: "উদ্দেশ্য: ইসলামকে নিজের ভিতর গভীরভাবে ধারণ করা।",
+                rules: [
+                    {
+                        id: "r_1",
+                        title: "রুল ১: সালাত ও জিকির ম্যাট্রিক্স (The Salah & Dhikr Matrix):",
+                        desc: "সময় অনুযায়ী পাঁচ ওয়াক্ত নামাজ জামায়াতের সাথে (বা সুনির্দিষ্ট সময়ে) আদায় করা এবং নামাজের পর বিশেষ আমল ও জিকির সম্পন্ন করা।",
+                        completed: false
+                    },
+                    {
+                        id: "r_2",
+                        title: "রুল ২: মাসনুন দোয়া ও আত্মিক বাউন্ডারি (The Masnoon Duas Boundary):",
+                        desc: "সকালের এবং সন্ধ্যার দৈনন্দিন মাসনুন দোয়া ও জিকিরগুলো কোনো অবস্থাতেই বাদ না দিয়ে নিয়মিত পড়া।",
+                        completed: false
+                    }
+                ]
+            },
+            {
+                id: "cat_2",
+                title: "প্রজেক্টের কাজ ও ক্যারিয়ারের নিয়ম (The Focus Rules)",
+                purpose: "উদ্দেশ্য: তোমার দৈনিক ৯ ঘণ্টা ৩৫ মিনিটের কাজের সেশনগুলোকে সর্বোচ্চ প্রোডাক্টিভ করা।",
+                rules: [
+                    {
+                        id: "r_3",
+                        title: "রুল ৩: দ্য ডিপ-ওয়ার্ক কন্ডিশন (Deep Work Matrix):",
+                        desc: "ল্যাপটপে যখনই কোনো সেশন (১ম থেকে ৬ষ্ঠ সেশন) শুরু হবে, ব্রাউজারের কাজের উইন্ডো ছাড়া বাকি সব ট্যাব এবং বিনোদনের সমস্ত নোটিফিকেশন সম্পূর্ণ অফ থাকবে।",
+                        completed: false
+                    },
+                    {
+                        id: "r_4",
+                        title: "রুল ৪: ওয়ার্কস্পেস বাউন্ডারি (Workspace Boundary):",
+                        desc: "কাজ কেবল টেবিল-চেয়ারেই হবে। সোফা, খাট বা আরামদায়ক কোনো ভঙ্গিতে অলস হয়ে কাজ করা যাবে না।",
+                        completed: false
+                    }
+                ]
+            },
+            {
+                id: "cat_3",
+                title: "মানসিক শক্তি ও রিল্যাক্সেশনের নিয়ম (The Mindset Rules)",
+                purpose: "উদ্দেশ্য: টানা কাজের পর ব্রেনকে সুস্থ উপায়ে রিফ্রেশ করা।",
+                rules: [
+                    {
+                        id: "r_5",
+                        title: "রুল ৫: সস্তা ডোপামিন ফিল্টার (Dopamine Filter):",
+                        desc: "সাকসেসের আগ পর্যন্ত কোনো অবস্থাতেই ফেসবুক, ইউটিউব বা রিলস স্ক্রোল করে ব্রেনকে আরও ক্লান্ত করা যাবে না।",
+                        completed: false
+                    },
+                    {
+                        id: "r_6",
+                        title: "রুল ৬: অফলাইন বাফার টাইম (Offline Buffer):",
+                        desc: "ব্রেকের সময়গুলোতে চোখ বন্ধ করে ২ মিনিট বসা, বারান্দা থেকে হেঁটে আসা বা পরিবারের সাথে কথা বলার মাধ্যমে ব্রেনকে সুস্থ উপায়ে শান্ত করতে হবে।",
+                        completed: false
+                    },
+                    {
+                        id: "r_7",
+                        title: "রুল ৭: ইউটিউব আনহুক পলিসি (YouTube Unhook Policy):",
+                        desc: "ইউটিউব সর্বদা ‘Unhook’ মোডে চলবে। কোনো প্রয়োজনীয় ভিডিও দেখার হলে তা সরাসরি সার্চ করে বের করে আগে সেভ করতে হবে, এরপর তা দেখতে হবে। রিসার্চ (Research) ছাড়া হোমপেজের কোনো সাজেস্টেড ভিডিও স্ক্রোল করা যাবে না।",
+                        completed: false
+                    }
+                ]
+            },
+            {
+                id: "cat_4",
+                title: "শারীরিক ও জৈবিক নিয়ম (The Physical Rules)",
+                purpose: "উদ্দেশ্য: শরীরকে চাঙ্গা রাখা, যাতে ব্রেন ফগ বা অলসতা তৈরি না হয়।",
+                rules: [
+                    {
+                        id: "r_8",
+                        title: "রুল ৮: লাইট লাঞ্চ ও চিনি বর্জন (Clean Fuel Diet):",
+                        desc: "দুপুরের খাবারের পর ২ ঘণ্টার অলস ঘুম পরিহার করে সর্বোচ্চ ৪৫ মিনিটের কায়লুলা (দুপুর-ঘুম) নিশ্চিত করতে হবে, যাতে শরীর \"Sleep Inertia\" বা নিস্তেজ ভাব থেকে মুক্ত থাকে।",
+                        completed: false
+                    },
+                    {
+                        id: "r_9",
+                        title: "রুল ৯: হাইড্রো-রিসেট ডিসিপ্লিন (Hydro-Reset):",
+                        desc: "প্রতিদিনের গোসল এবং অজু যথাসময়ে সম্পন্ন করতে হবে, যা শরীরের রক্ত সঞ্চালন স্বাভাবিক রাখে এবং আলসেমি দূর করে।",
+                        completed: false
+                    }
+                ]
+            },
+            {
+                id: "cat_5",
+                title: "দৈনিক স্ব-পর্যবেক্ষণ ও সমস্যা সমাধান ও রাতের নিয়ম (The Spiritual & Night Rules)",
+                purpose: "উদ্দেশ্য: দিন শেষে মানসিক প্রশান্তি নিশ্চিত করা।",
+                rules: [
+                    {
+                        id: "r_10",
+                        title: "রুল ১০: রাত ৯টা ৪৫ মিনিটের হার্ড শাটডাউন (Hard Shutdown):",
+                        desc: "ঘড়িতে ৯টা ৪৫ মিনিট বাজার সাথে সাথে ল্যাপটপ বন্ধ হবে। এরপর আর কোনো স্ক্রিন টাইম বা কাজের চিন্তা থাকবে না। রাতের বাকি সময়টা হবে সম্পূর্ণ মানসিক বিশ্রামের।",
+                        completed: false
+                    },
+                    {
+                        id: "r_11",
+                        title: "রুল ১১: দৈনিক শৃঙ্খলার ব্যাঘাত নোট ও সমাধান (Daily Discipline Audit):",
+                        desc: "রুলস ও রুটিন সুশৃঙ্খলভাবে পরিচালনায় কোন কোন সমস্যা বা বিষয়গুলো ব্যাঘাত ঘটাচ্ছে, তা নিয়মিত ডায়েরিতে নোট করা। প্রতিদিন নির্দিষ্ট সময়টিতে সেই চিহ্নিত সমস্যাগুলোর স্থায়ী সমাধান বের করা।",
+                        completed: false
+                    }
+                ]
+            }
+        ]
+    };
+
+    const STORAGE_KEY = "lifetime_identity_rules_v1";
+    let appData = loadData();
+
+    function loadData() {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+            try {
+                return JSON.parse(saved);
+            } catch (e) {
+                return JSON.parse(JSON.stringify(defaultData));
+            }
+        }
+        return JSON.parse(JSON.stringify(defaultData));
+    }
+
+    function saveData() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+        updateProgress();
+    }
+
+    function render() {
+        document.getElementById("mainTitle").innerText = appData.title;
+        document.getElementById("subTitle").innerText = appData.subtitle;
+
+        const container = document.getElementById("checklistContainer");
+        container.innerHTML = "";
+
+        appData.categories.forEach((cat, catIndex) => {
+            const card = document.createElement("section");
+            card.className = "category-card";
+
+            const header = document.createElement("div");
+            header.className = "category-header";
+            header.innerHTML = `
+                <div class="category-title-area">
+                    <h2 class="category-title" contenteditable="true" spellcheck="false" 
+                        onblur="updateCategoryField(${catIndex}, 'title', this.innerText)">${escapeHtml(cat.title)}</h2>
+                    <p class="category-purpose" contenteditable="true" spellcheck="false" 
+                        onblur="updateCategoryField(${catIndex}, 'purpose', this.innerText)">${escapeHtml(cat.purpose)}</p>
+                </div>
+                <button class="icon-btn" title="এই ক্যাটাগরিটি মুছে ফেলুন" onclick="deleteCategory(${catIndex})">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                </button>
+            `;
+            card.appendChild(header);
+
+            const ul = document.createElement("ul");
+            ul.className = "rules-list";
+
+            cat.rules.forEach((rule, ruleIndex) => {
+                const li = document.createElement("li");
+                li.className = `rule-item ${rule.completed ? "completed" : ""}`;
+                li.innerHTML = `
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" class="custom-checkbox" ${rule.completed ? "checked" : ""} 
+                            onchange="toggleRule(${catIndex}, ${ruleIndex})">
+                    </div>
+                    <div class="rule-content">
+                        <div class="rule-title" contenteditable="true" spellcheck="false" 
+                            onblur="updateRuleField(${catIndex}, ${ruleIndex}, 'title', this.innerText)">${escapeHtml(rule.title)}</div>
+                        <div class="rule-desc" contenteditable="true" spellcheck="false" 
+                            onblur="updateRuleField(${catIndex}, ${ruleIndex}, 'desc', this.innerText)">${escapeHtml(rule.desc)}</div>
+                    </div>
+                    <button class="icon-btn" title="এই রুলটি মুছে ফেলুন" onclick="deleteRule(${catIndex}, ${ruleIndex})">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                `;
+                ul.appendChild(li);
+            });
+            card.appendChild(ul);
+
+            const footer = document.createElement("div");
+            footer.className = "category-footer";
+            footer.innerHTML = `
+                <button class="btn-add-rule" onclick="addRule(${catIndex})">+ নতুন রুল যুক্ত করুন</button>
+            `;
+            card.appendChild(footer);
+
+            container.appendChild(card);
+        });
+
+        updateProgress();
+    }
+
+    document.getElementById("mainTitle").addEventListener("blur", function() {
+        appData.title = this.innerText.trim() || "শিরোনামহীন চেকলিস্ট";
+        saveData();
+    });
+
+    document.getElementById("subTitle").addEventListener("blur", function() {
+        appData.subtitle = this.innerText.trim() || "সাব-টাইটেল লিখুন";
+        saveData();
+    });
+
+    function updateCategoryField(catIndex, field, value) {
+        appData.categories[catIndex][field] = value.trim();
+        saveData();
+    }
+
+    function updateRuleField(catIndex, ruleIndex, field, value) {
+        appData.categories[catIndex].rules[ruleIndex][field] = value.trim();
+        saveData();
+    }
+
+    function toggleRule(catIndex, ruleIndex) {
+        appData.categories[catIndex].rules[ruleIndex].completed = !appData.categories[catIndex].rules[ruleIndex].completed;
+        saveData();
+        render();
+    }
+
+    function addCategory() {
+        appData.categories.push({
+            id: "cat_" + Date.now(),
+            title: "নতুন ক্যাটাগরির নাম (ক্লিক করে এডিট করুন)",
+            purpose: "উদ্দেশ্য: এই ক্যাটাগরির মূল লক্ষ্য এখানে লিখুন।",
+            rules: [
+                {
+                    id: "r_" + Date.now(),
+                    title: "নতুন রুল:",
+                    desc: "এখানে রুলের বিস্তারিত নিয়ম লিখুন।",
+                    completed: false
+                }
+            ]
+        });
+        saveData();
+        render();
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+
+    function deleteCategory(catIndex) {
+        if (confirm("আপনি কি নিশ্চিতভাবে এই পুরো ক্যাটাগরি এবং এর ভেতরের সব রুল মুছে ফেলতে চান?")) {
+            appData.categories.splice(catIndex, 1);
+            saveData();
+            render();
+        }
+    }
+
+    function addRule(catIndex) {
+        const nextNum = appData.categories.reduce((acc, c) => acc + c.rules.length, 0) + 1;
+        appData.categories[catIndex].rules.push({
+            id: "r_" + Date.now(),
+            title: `রুল ${nextNum}: নতুন রুলের শিরোনাম:`,
+            desc: "এখানে রুলটির বিস্তারিত বিবরণ লিখুন।",
+            completed: false
+        });
+        saveData();
+        render();
+    }
+
+    function deleteRule(catIndex, ruleIndex) {
+        if (confirm("এই রুলটি কি মুছে ফেলতে চান?")) {
+            appData.categories[catIndex].rules.splice(ruleIndex, 1);
+            saveData();
+            render();
+        }
+    }
+
+    function uncheckAll() {
+        appData.categories.forEach(cat => {
+            cat.rules.forEach(rule => rule.completed = false);
+        });
+        saveData();
+        render();
+    }
+
+    function resetToDefault() {
+        if (confirm("সতর্কতা: আপনার করা সব পরিবর্তন মুছে গিয়ে একদম শুরুর ডিফল্ট চেকলিস্ট ফিরে আসবে। আপনি কি নিশ্চিত?")) {
+            localStorage.removeItem(STORAGE_KEY);
+            appData = JSON.parse(JSON.stringify(defaultData));
+            saveData();
+            render();
+        }
+    }
+
+    function updateProgress() {
+        let total = 0;
+        let completed = 0;
+
+        appData.categories.forEach(cat => {
+            cat.rules.forEach(rule => {
+                total++;
+                if (rule.completed) completed++;
+            });
+        });
+
+        const percent = total === 0 ? 0 : Math.round((completed / total) * 100);
+        document.getElementById("progressText").innerText = `আজকের অগ্রগতি: ${toBengaliNumber(completed)} / ${toBengaliNumber(total)} সম্পন্ন`;
+        document.getElementById("progressPercent").innerText = `${percent}%`;
+        document.getElementById("progressFill").style.width = `${percent}%`;
+    }
+
+    function toBengaliNumber(num) {
+        const bnDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+        return num.toString().replace(/\d/g, d => bnDigits[d]);
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    render();
+</script>
+
+</body>
+</html>
